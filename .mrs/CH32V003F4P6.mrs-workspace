@@ -1,11 +1,12 @@
 {
 	"folders": [
 		{
+			"name": ".mrs",
 			"path": "."
 		},
 		{
-			"name": "CH32V003F4P6",
-			"path": "../"
+			"name": "CH32V00x-Task-Scheduler",
+			"path": ".."
 		}
 	],
 	"settings": {

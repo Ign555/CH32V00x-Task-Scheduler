@@ -23,13 +23,14 @@
  */
 
 #include "debug.h"
-
+#include "ic.h"
 
 /* Global define */
 
 
 /* Global Variable */
 vu8 val;
+extern IC *i_see;
 
 /*********************************************************************
  * @fn      USARTx_CFG
@@ -72,11 +73,12 @@ void USARTx_CFG(void)
  *
  * @return  none
  */
+
 int main(void)
 {
     NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
     SystemCoreClockUpdate();
-    Delay_Init();
+    //Delay_Init();
 #if (SDI_PRINT == SDI_PR_OPEN)
     SDI_Printf_Enable();
 #else
@@ -86,19 +88,22 @@ int main(void)
     printf( "ChipID:%08x\r\n", DBGMCU_GetCHIPID() );
 
     USARTx_CFG();
-
+    i_see = IC_init(8);
     while(1)
     {
-
+        IC_softsleep_ms(10000);
+        //IC_delay_ms(1000);
+        printf("t");
+        /*
         while(USART_GetFlagStatus(USART1, USART_FLAG_RXNE) == RESET)
         {
             /* waiting for receiving finish */
-        }
+        /*}
         val = (USART_ReceiveData(USART1));
         USART_SendData(USART1, ~val);
         while(USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET)
-        {
+        {*/
             /* waiting for sending finish */
-        }
+        //}
     }
 }
